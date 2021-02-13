@@ -7,6 +7,20 @@ socket.on("disconnect", playerId => removePlayer(playerId));
 
 let currentPlayer = null;
 
+// Callback function
+socket.on("update player", data => {
+  if (data) {
+    let player = findPlayerById(data.id);
+
+    if (player) {
+      for (const [key, value] of Object.entries(data)) {
+        player[key] = value;
+        // lerp update
+      }
+    }
+  }
+});
+
 function updatePlayers(serverPlayers) {
   for (let i = 0; i < serverPlayers.length; i++) {
     let playerFromServer = serverPlayers[i];

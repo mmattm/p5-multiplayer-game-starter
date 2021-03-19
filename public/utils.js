@@ -1,4 +1,4 @@
-const socket = io.connect("http://192.168.1.27:3000");
+const socket = io.connect("http://10.192.234.97:3000");
 
 let players = [];
 

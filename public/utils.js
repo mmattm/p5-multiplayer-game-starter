@@ -1,14 +1,14 @@
-const socket = io.connect("http://10.192.234.97:3000");
+const socket = io.connect();
 
 let players = [];
 
-socket.on("heartbeat", players => updatePlayers(players));
-socket.on("disconnect", playerId => removePlayer(playerId));
+socket.on("heartbeat", (players) => updatePlayers(players));
+socket.on("disconnect", (playerId) => removePlayer(playerId));
 
 let currentPlayer = null;
 
 // Callback function
-socket.on("update player", data => {
+socket.on("update player", (data) => {
   if (data) {
     let player = findPlayerById(data.id);
 
@@ -59,7 +59,7 @@ function findPlayerById(id) {
 }
 
 function removePlayer(playerId) {
-  players = players.filter(player => player.id !== playerId);
+  players = players.filter((player) => player.id !== playerId);
 }
 
 function windowResized() {
